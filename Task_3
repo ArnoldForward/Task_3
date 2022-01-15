@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main()
+{
+    char line[100000] = {0};
+    gets(line);
+    size_t len = 0;
+    for(size_t i = 0; line[i] != '\0'; i++)
+        len++;
+    short trig = 0;
+    while(1)
+    {
+        trig = 0;
+        for(size_t i = 0; i < len; i++)
+            if(line[i] == line[i + 1])
+            {
+                trig = 1;
+                line[i] = '\0';
+                line[i + 1] = '\0';
+            }
+        if(trig == 0)
+        {
+            puts(line);
+            return 0;
+        }
+        char buff[100000] = {0};
+        size_t j = 0;
+        for(size_t i = 0; i < len; i++)
+            if(line[i] != '\0')
+            {
+                buff[j] = line[i];
+                j++;
+            }
+        for(size_t i = 0; i < len; i++)
+            line[i] = '\0';
+        for(size_t i = 0; i < j; i++)
+            line[i] = buff[i];
+        len = j;
+    }
+    return 0;
+}
